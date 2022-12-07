@@ -1,10 +1,11 @@
+import 'package:demo_meeting/home_page/widgets/search_box_widget.dart';
 import 'package:demo_meeting/utils/spacing.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/app_color.dart';
 import '../network/dto/user_dto.dart';
 
-class UserListPage extends StatelessWidget {
+class UserListPage extends StatefulWidget {
   const UserListPage({
     Key? key,
     required this.userList,
@@ -15,7 +16,31 @@ class UserListPage extends StatelessWidget {
   final ValueChanged<Result> onUserTap;
 
   @override
+  State<UserListPage> createState() => _UserListPageState();
+}
+
+class _UserListPageState extends State<UserListPage> {
+  late TextEditingController searchController;
+
+  @override
+  void initState() {
+    searchController = TextEditingController()
+      ..addListener(() {
+        setState(() {});
+      });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final localList = searchController.text.isEmpty
+        ? widget.userList
+        : widget.userList
+            .where(
+              (attendance) =>
+                  attendance.name.toLowerCase().contains(searchController.text.toLowerCase()),
+            )
+            .toList();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -30,14 +55,25 @@ class UserListPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: ListView.separated(
-          itemCount: userList.length,
-          separatorBuilder: (_, __) => VerticalSpacer.medium(),
-          itemBuilder: (context, index) => ListTile(
-            leading: Image.network(userList[index].image!),
-            title: Text(userList[index].name),
-            onTap: () => onUserTap(userList[index]),
-          ),
+        child: Column(
+          children: [
+            SearchBoxWidget(searchController: searchController),
+            VerticalSpacer.medium(),
+            Expanded(
+              child: localList.isEmpty
+                  ? const Text('No result')
+                  : ListView.separated(
+                      itemCount: localList.length,
+                      shrinkWrap: true,
+                      separatorBuilder: (_, __) => VerticalSpacer.medium(),
+                      itemBuilder: (context, index) => ListTile(
+                        leading: Image.network(localList[index].image!),
+                        title: Text(localList[index].name),
+                        onTap: () => widget.onUserTap(localList[index]),
+                      ),
+                    ),
+            ),
+          ],
         ),
       ),
     );
