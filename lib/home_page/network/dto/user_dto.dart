@@ -6,10 +6,20 @@ part 'user_dto.g.dart';
 @freezed
 class UserDto with _$UserDto {
   const factory UserDto({
+    required Info info,
     required List<Result> results,
   }) = _UserDto;
 
   factory UserDto.fromJson(Map<String, dynamic> json) => _$UserDtoFromJson(json);
+}
+
+@freezed
+class Info with _$Info {
+  const factory Info({
+    required int pages,
+  }) = _Info;
+
+  factory Info.fromJson(Map<String, dynamic> json) => _$InfoFromJson(json);
 }
 
 @freezed

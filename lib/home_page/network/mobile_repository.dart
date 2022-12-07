@@ -6,10 +6,11 @@ import 'package:either_dart/either.dart';
 class MobileRepository {
   final _dio = Dio(BaseOptions(baseUrl: 'https://rickandmortyapi.com/api/'));
 
-  Future<Either<ApiFailure, UserDto>> getListUser() async {
+  Future<Either<ApiFailure, List<Result>>> getListUser() async {
     try {
-      final response = await _dio.get('/character/');
-      return Right(UserDto.fromJson(response.data));
+      final response = await _dio.get('/character/',);
+      final userDto = UserDto.fromJson(response.data);
+      return Right(userDto.results);
     } on DioError catch (e) {
       return Left(ApiFailure.serverError(e.toString()));
     }

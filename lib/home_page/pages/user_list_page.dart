@@ -28,13 +28,16 @@ class UserListPage extends StatelessWidget {
         foregroundColor: AppColor.grey88,
         elevation: 0,
       ),
-      body: ListView.separated(
-        itemCount: userList.length,
-        separatorBuilder: (_, __) => VerticalSpacer.medium(),
-        itemBuilder: (context, index) => ListTile(
-          leading: Image.network(userList[index].image!),
-          title: Text(userList[index].name),
-          onTap: () => onUserTap(userList[index]),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        child: ListView.separated(
+          itemCount: userList.length,
+          separatorBuilder: (_, __) => VerticalSpacer.medium(),
+          itemBuilder: (context, index) => ListTile(
+            leading: Image.network(userList[index].image!),
+            title: Text(userList[index].name),
+            onTap: () => onUserTap(userList[index]),
+          ),
         ),
       ),
     );

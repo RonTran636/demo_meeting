@@ -16,11 +16,14 @@ class CalendarCubit extends Cubit<CalendarState> {
 
   List<MeetingDpo> listMeeting = [];
 
+  final List<Result> _listUser = [];
+
   void getListUser() async {
     emit(const CalendarState.loading());
     final response = await _repository.getListUser();
     response.fold((left) {}, (right) {
-      emit(CalendarState.userLoaded(right));
+      _listUser.addAll(right);
+      emit(CalendarState.userLoaded(_listUser));
     });
   }
 

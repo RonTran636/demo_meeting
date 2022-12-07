@@ -20,6 +20,7 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserDto {
+  Info get info => throw _privateConstructorUsedError;
   List<Result> get results => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -32,7 +33,9 @@ abstract class $UserDtoCopyWith<$Res> {
   factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) then) =
       _$UserDtoCopyWithImpl<$Res, UserDto>;
   @useResult
-  $Res call({List<Result> results});
+  $Res call({Info info, List<Result> results});
+
+  $InfoCopyWith<$Res> get info;
 }
 
 /// @nodoc
@@ -48,14 +51,27 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? info = null,
     Object? results = null,
   }) {
     return _then(_value.copyWith(
+      info: null == info
+          ? _value.info
+          : info // ignore: cast_nullable_to_non_nullable
+              as Info,
       results: null == results
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
               as List<Result>,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $InfoCopyWith<$Res> get info {
+    return $InfoCopyWith<$Res>(_value.info, (value) {
+      return _then(_value.copyWith(info: value) as $Val);
+    });
   }
 }
 
@@ -66,7 +82,10 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       __$$_UserDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Result> results});
+  $Res call({Info info, List<Result> results});
+
+  @override
+  $InfoCopyWith<$Res> get info;
 }
 
 /// @nodoc
@@ -79,9 +98,14 @@ class __$$_UserDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? info = null,
     Object? results = null,
   }) {
     return _then(_$_UserDto(
+      info: null == info
+          ? _value.info
+          : info // ignore: cast_nullable_to_non_nullable
+              as Info,
       results: null == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
@@ -93,11 +117,14 @@ class __$$_UserDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserDto implements _UserDto {
-  const _$_UserDto({required final List<Result> results}) : _results = results;
+  const _$_UserDto({required this.info, required final List<Result> results})
+      : _results = results;
 
   factory _$_UserDto.fromJson(Map<String, dynamic> json) =>
       _$$_UserDtoFromJson(json);
 
+  @override
+  final Info info;
   final List<Result> _results;
   @override
   List<Result> get results {
@@ -108,7 +135,7 @@ class _$_UserDto implements _UserDto {
 
   @override
   String toString() {
-    return 'UserDto(results: $results)';
+    return 'UserDto(info: $info, results: $results)';
   }
 
   @override
@@ -116,13 +143,14 @@ class _$_UserDto implements _UserDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserDto &&
+            (identical(other.info, info) || other.info == info) &&
             const DeepCollectionEquality().equals(other._results, _results));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_results));
+  int get hashCode => Object.hash(
+      runtimeType, info, const DeepCollectionEquality().hash(_results));
 
   @JsonKey(ignore: true)
   @override
@@ -139,16 +167,147 @@ class _$_UserDto implements _UserDto {
 }
 
 abstract class _UserDto implements UserDto {
-  const factory _UserDto({required final List<Result> results}) = _$_UserDto;
+  const factory _UserDto(
+      {required final Info info,
+      required final List<Result> results}) = _$_UserDto;
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
 
+  @override
+  Info get info;
   @override
   List<Result> get results;
   @override
   @JsonKey(ignore: true)
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+Info _$InfoFromJson(Map<String, dynamic> json) {
+  return _Info.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Info {
+  int get pages => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $InfoCopyWith<Info> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $InfoCopyWith<$Res> {
+  factory $InfoCopyWith(Info value, $Res Function(Info) then) =
+      _$InfoCopyWithImpl<$Res, Info>;
+  @useResult
+  $Res call({int pages});
+}
+
+/// @nodoc
+class _$InfoCopyWithImpl<$Res, $Val extends Info>
+    implements $InfoCopyWith<$Res> {
+  _$InfoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pages = null,
+  }) {
+    return _then(_value.copyWith(
+      pages: null == pages
+          ? _value.pages
+          : pages // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_InfoCopyWith<$Res> implements $InfoCopyWith<$Res> {
+  factory _$$_InfoCopyWith(_$_Info value, $Res Function(_$_Info) then) =
+      __$$_InfoCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int pages});
+}
+
+/// @nodoc
+class __$$_InfoCopyWithImpl<$Res> extends _$InfoCopyWithImpl<$Res, _$_Info>
+    implements _$$_InfoCopyWith<$Res> {
+  __$$_InfoCopyWithImpl(_$_Info _value, $Res Function(_$_Info) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pages = null,
+  }) {
+    return _then(_$_Info(
+      pages: null == pages
+          ? _value.pages
+          : pages // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Info implements _Info {
+  const _$_Info({required this.pages});
+
+  factory _$_Info.fromJson(Map<String, dynamic> json) => _$$_InfoFromJson(json);
+
+  @override
+  final int pages;
+
+  @override
+  String toString() {
+    return 'Info(pages: $pages)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Info &&
+            (identical(other.pages, pages) || other.pages == pages));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, pages);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InfoCopyWith<_$_Info> get copyWith =>
+      __$$_InfoCopyWithImpl<_$_Info>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_InfoToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Info implements Info {
+  const factory _Info({required final int pages}) = _$_Info;
+
+  factory _Info.fromJson(Map<String, dynamic> json) = _$_Info.fromJson;
+
+  @override
+  int get pages;
+  @override
+  @JsonKey(ignore: true)
+  _$$_InfoCopyWith<_$_Info> get copyWith => throw _privateConstructorUsedError;
 }
 
 Result _$ResultFromJson(Map<String, dynamic> json) {

@@ -20,7 +20,7 @@ mixin _$CalendarState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserDto userDto) userLoaded,
+    required TResult Function(List<Result> userDto) userLoaded,
     required TResult Function(List<MeetingDpo> listMeetingDpo)
         bookingListLoaded,
     required TResult Function() connectivityError,
@@ -31,7 +31,7 @@ mixin _$CalendarState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserDto userDto)? userLoaded,
+    TResult? Function(List<Result> userDto)? userLoaded,
     TResult? Function(List<MeetingDpo> listMeetingDpo)? bookingListLoaded,
     TResult? Function()? connectivityError,
     TResult? Function(String errorMessage)? serverError,
@@ -41,7 +41,7 @@ mixin _$CalendarState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserDto userDto)? userLoaded,
+    TResult Function(List<Result> userDto)? userLoaded,
     TResult Function(List<MeetingDpo> listMeetingDpo)? bookingListLoaded,
     TResult Function()? connectivityError,
     TResult Function(String errorMessage)? serverError,
@@ -138,7 +138,7 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserDto userDto) userLoaded,
+    required TResult Function(List<Result> userDto) userLoaded,
     required TResult Function(List<MeetingDpo> listMeetingDpo)
         bookingListLoaded,
     required TResult Function() connectivityError,
@@ -152,7 +152,7 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserDto userDto)? userLoaded,
+    TResult? Function(List<Result> userDto)? userLoaded,
     TResult? Function(List<MeetingDpo> listMeetingDpo)? bookingListLoaded,
     TResult? Function()? connectivityError,
     TResult? Function(String errorMessage)? serverError,
@@ -165,7 +165,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserDto userDto)? userLoaded,
+    TResult Function(List<Result> userDto)? userLoaded,
     TResult Function(List<MeetingDpo> listMeetingDpo)? bookingListLoaded,
     TResult Function()? connectivityError,
     TResult Function(String errorMessage)? serverError,
@@ -264,7 +264,7 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserDto userDto) userLoaded,
+    required TResult Function(List<Result> userDto) userLoaded,
     required TResult Function(List<MeetingDpo> listMeetingDpo)
         bookingListLoaded,
     required TResult Function() connectivityError,
@@ -278,7 +278,7 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserDto userDto)? userLoaded,
+    TResult? Function(List<Result> userDto)? userLoaded,
     TResult? Function(List<MeetingDpo> listMeetingDpo)? bookingListLoaded,
     TResult? Function()? connectivityError,
     TResult? Function(String errorMessage)? serverError,
@@ -291,7 +291,7 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserDto userDto)? userLoaded,
+    TResult Function(List<Result> userDto)? userLoaded,
     TResult Function(List<MeetingDpo> listMeetingDpo)? bookingListLoaded,
     TResult Function()? connectivityError,
     TResult Function(String errorMessage)? serverError,
@@ -357,9 +357,7 @@ abstract class _$$_UserLoadedCopyWith<$Res> {
           _$_UserLoaded value, $Res Function(_$_UserLoaded) then) =
       __$$_UserLoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({UserDto userDto});
-
-  $UserDtoCopyWith<$Res> get userDto;
+  $Res call({List<Result> userDto});
 }
 
 /// @nodoc
@@ -377,28 +375,25 @@ class __$$_UserLoadedCopyWithImpl<$Res>
   }) {
     return _then(_$_UserLoaded(
       null == userDto
-          ? _value.userDto
+          ? _value._userDto
           : userDto // ignore: cast_nullable_to_non_nullable
-              as UserDto,
+              as List<Result>,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserDtoCopyWith<$Res> get userDto {
-    return $UserDtoCopyWith<$Res>(_value.userDto, (value) {
-      return _then(_value.copyWith(userDto: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$_UserLoaded implements _UserLoaded {
-  const _$_UserLoaded(this.userDto);
+  const _$_UserLoaded(final List<Result> userDto) : _userDto = userDto;
 
+  final List<Result> _userDto;
   @override
-  final UserDto userDto;
+  List<Result> get userDto {
+    if (_userDto is EqualUnmodifiableListView) return _userDto;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userDto);
+  }
 
   @override
   String toString() {
@@ -410,11 +405,12 @@ class _$_UserLoaded implements _UserLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserLoaded &&
-            (identical(other.userDto, userDto) || other.userDto == userDto));
+            const DeepCollectionEquality().equals(other._userDto, _userDto));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userDto);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_userDto));
 
   @JsonKey(ignore: true)
   @override
@@ -427,7 +423,7 @@ class _$_UserLoaded implements _UserLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserDto userDto) userLoaded,
+    required TResult Function(List<Result> userDto) userLoaded,
     required TResult Function(List<MeetingDpo> listMeetingDpo)
         bookingListLoaded,
     required TResult Function() connectivityError,
@@ -441,7 +437,7 @@ class _$_UserLoaded implements _UserLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserDto userDto)? userLoaded,
+    TResult? Function(List<Result> userDto)? userLoaded,
     TResult? Function(List<MeetingDpo> listMeetingDpo)? bookingListLoaded,
     TResult? Function()? connectivityError,
     TResult? Function(String errorMessage)? serverError,
@@ -454,7 +450,7 @@ class _$_UserLoaded implements _UserLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserDto userDto)? userLoaded,
+    TResult Function(List<Result> userDto)? userLoaded,
     TResult Function(List<MeetingDpo> listMeetingDpo)? bookingListLoaded,
     TResult Function()? connectivityError,
     TResult Function(String errorMessage)? serverError,
@@ -511,9 +507,9 @@ class _$_UserLoaded implements _UserLoaded {
 }
 
 abstract class _UserLoaded implements CalendarState {
-  const factory _UserLoaded(final UserDto userDto) = _$_UserLoaded;
+  const factory _UserLoaded(final List<Result> userDto) = _$_UserLoaded;
 
-  UserDto get userDto;
+  List<Result> get userDto;
   @JsonKey(ignore: true)
   _$$_UserLoadedCopyWith<_$_UserLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -593,7 +589,7 @@ class _$_ListLoaded implements _ListLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserDto userDto) userLoaded,
+    required TResult Function(List<Result> userDto) userLoaded,
     required TResult Function(List<MeetingDpo> listMeetingDpo)
         bookingListLoaded,
     required TResult Function() connectivityError,
@@ -607,7 +603,7 @@ class _$_ListLoaded implements _ListLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserDto userDto)? userLoaded,
+    TResult? Function(List<Result> userDto)? userLoaded,
     TResult? Function(List<MeetingDpo> listMeetingDpo)? bookingListLoaded,
     TResult? Function()? connectivityError,
     TResult? Function(String errorMessage)? serverError,
@@ -620,7 +616,7 @@ class _$_ListLoaded implements _ListLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserDto userDto)? userLoaded,
+    TResult Function(List<Result> userDto)? userLoaded,
     TResult Function(List<MeetingDpo> listMeetingDpo)? bookingListLoaded,
     TResult Function()? connectivityError,
     TResult Function(String errorMessage)? serverError,
@@ -726,7 +722,7 @@ class _$_ConnectivityError implements _ConnectivityError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserDto userDto) userLoaded,
+    required TResult Function(List<Result> userDto) userLoaded,
     required TResult Function(List<MeetingDpo> listMeetingDpo)
         bookingListLoaded,
     required TResult Function() connectivityError,
@@ -740,7 +736,7 @@ class _$_ConnectivityError implements _ConnectivityError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserDto userDto)? userLoaded,
+    TResult? Function(List<Result> userDto)? userLoaded,
     TResult? Function(List<MeetingDpo> listMeetingDpo)? bookingListLoaded,
     TResult? Function()? connectivityError,
     TResult? Function(String errorMessage)? serverError,
@@ -753,7 +749,7 @@ class _$_ConnectivityError implements _ConnectivityError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserDto userDto)? userLoaded,
+    TResult Function(List<Result> userDto)? userLoaded,
     TResult Function(List<MeetingDpo> listMeetingDpo)? bookingListLoaded,
     TResult Function()? connectivityError,
     TResult Function(String errorMessage)? serverError,
@@ -880,7 +876,7 @@ class _$_ServerError implements _ServerError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserDto userDto) userLoaded,
+    required TResult Function(List<Result> userDto) userLoaded,
     required TResult Function(List<MeetingDpo> listMeetingDpo)
         bookingListLoaded,
     required TResult Function() connectivityError,
@@ -894,7 +890,7 @@ class _$_ServerError implements _ServerError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserDto userDto)? userLoaded,
+    TResult? Function(List<Result> userDto)? userLoaded,
     TResult? Function(List<MeetingDpo> listMeetingDpo)? bookingListLoaded,
     TResult? Function()? connectivityError,
     TResult? Function(String errorMessage)? serverError,
@@ -907,7 +903,7 @@ class _$_ServerError implements _ServerError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserDto userDto)? userLoaded,
+    TResult Function(List<Result> userDto)? userLoaded,
     TResult Function(List<MeetingDpo> listMeetingDpo)? bookingListLoaded,
     TResult Function()? connectivityError,
     TResult Function(String errorMessage)? serverError,

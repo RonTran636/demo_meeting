@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../utils/app_color.dart';
 import '../dpo/meeting_dpo.dart';
@@ -57,7 +58,7 @@ class _BookingPageState extends State<BookingPage> {
           child: BlocBuilder<CalendarCubit, CalendarState>(
             builder: (context, state) {
               return state.maybeWhen(
-                userLoaded: (userDto) {
+                userLoaded: (listUser) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -65,22 +66,22 @@ class _BookingPageState extends State<BookingPage> {
                       const Text('Selected user:'),
                       VerticalSpacer.medium(),
                       ListTile(
-                        leading: Image.network(userDto.results[_indexSelected].image!),
+                        leading: Image.network(listUser[_indexSelected].image!),
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => UserListPage(
-                              userList: userDto.results,
+                              userList: listUser,
                               onUserTap: (value) {
                                 Navigator.pop(context);
                                 setState(() {
-                                  _indexSelected = userDto.results.indexOf(value);
+                                  _indexSelected = listUser.indexOf(value);
                                 });
                               },
                             ),
                           ),
                         ),
-                        title: Text(userDto.results[_indexSelected].name),
+                        title: Text(listUser[_indexSelected].name),
                       ),
                       VerticalSpacer.medium(),
                       const Divider(),
@@ -170,12 +171,13 @@ class _BookingPageState extends State<BookingPage> {
                           _cubit.addMeeting(
                             MeetingDpo(
                               eventId: '',
-                              eventName: 'Meeting with ${userDto.results[_indexSelected].name}',
+                              eventName: 'Meeting with ${listUser[_indexSelected].name}',
                               backgroundColor: AppColor.markerColors[Random().nextInt(4)],
                               eventDay: DateFormat('yyyyMMdd').format(_selectedDay),
                               eventDuration: _currentTimeSlot,
                             ),
                           );
+                          Fluttertoast.showToast(msg: 'Booking success');
                           Navigator.pop(context);
                         },
                         child: Container(
