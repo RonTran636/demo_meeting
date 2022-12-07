@@ -23,8 +23,8 @@ class _HomePageBodyState extends State<HomePageBody> with TickerProviderStateMix
         AppBar(
           title: Text('MEETING DEMO'),
           centerTitle: false,
-          backgroundColor: AppColor.white,
-          foregroundColor: AppColor.black,
+          backgroundColor: AppColor.teacherPrimaryColor,
+          foregroundColor: AppColor.white,
           elevation: 0,
         ),
         Expanded(
