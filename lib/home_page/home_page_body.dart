@@ -28,43 +28,19 @@ class _HomePageBodyState extends State<HomePageBody> with TickerProviderStateMix
           elevation: 0,
         ),
         Expanded(
-          child: BlocConsumer<CalendarCubit, CalendarState>(
-            listener: (context, state) => state.maybeWhen(
-              initial: () => false,
-              loading: () => showInProgressDialog(context),
-              bookingListLoaded: (_) => closeInProgressDialog(),
-              serverError: (message) {
-                closeInProgressDialog();
-                return true;
-              },
-              orElse: () {
-                closeInProgressDialog();
-                return true;
-              },
-            ),
+          child: BlocBuilder<CalendarCubit, CalendarState>(
             builder: (context, state) {
-              Map<String, List<MeetingDpo>> _eventGroupByDay = state.maybeWhen(
+              Map<String, List<MeetingDpo>> eventGroupByDay = state.maybeWhen(
                 bookingListLoaded: (dpo) => dpo.groupBy((e) => e.eventDay),
                 orElse: () => {},
               );
               return CalendarTabViewWidget(
                 onDateSelect: (date) => setState(() {}),
-                listEvent: _eventGroupByDay,
+                listEvent: eventGroupByDay,
               );
             },
           ),
         ),
-        // Padding(
-        //   padding: EdgeInsets.symmetric(
-        //     horizontal: AppSpacing.medium.space,
-        //     vertical: AppSpacing.small.space,
-        //   ),
-        //   child: EtonButton.primary2(
-        //     LocaleKeys.calendarSection_bookPTC.tr(),
-        //     onPressed: () => getIt<AppRouter>().push(PtcBookingRoute()),
-        //     context: context,
-        //   ),
-        // ),
       ],
     );
   }

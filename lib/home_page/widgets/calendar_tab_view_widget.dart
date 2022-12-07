@@ -36,10 +36,13 @@ class _CalendarTabViewWidgetState extends State<CalendarTabViewWidget> {
     return BlocListener<CalendarCubit, CalendarState>(
       listener: (context, state) {
         state.maybeWhen(
-          bookingListLoaded: (listMeetingDpo) => _calendar(context).onDaySelected!(
-            DateTime.now(),
-            DateTime.now(),
-          ),
+          bookingListLoaded: (listMeetingDpo) =>
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+            _calendar(context).onDaySelected!(
+              DateTime.now(),
+              DateTime.now(),
+            );
+          }),
           orElse: () {},
         );
       },

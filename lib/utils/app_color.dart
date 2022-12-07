@@ -16,7 +16,7 @@ class AppColor {
   static const remarkBackground = Color(0xFFDAF0EC);
 
   static const checkInSuccess = Color(0xFF5DB057);
-  static const sentHomeOrange = Color(0xFFF9842E);
+  static const orange = Color(0xFFF9842E);
   static const labelButtonBackground = Color(0xFFFDE9EB);
   static const orangeWarningTemperature = Color(0xFFFA9348);
 
@@ -52,5 +52,5 @@ class AppColor {
   static const blackText = Color(0xFF111111);
   static const blackText29 = Color(0xFF292929);
 
-  static const markerColors = [redText, blueText, greenText, sentHomeOrange];
+  static const markerColors = [redText, blueText, greenText, orange];
 }

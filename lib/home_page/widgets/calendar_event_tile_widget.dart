@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../utils/app_color.dart';
@@ -25,14 +26,13 @@ class CalendarEventTileWidget extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(8.r)),
       ),
       child: ListTile(
-        onTap: () {},
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Assets.images.clock.svg(),
+            const Icon(CupertinoIcons.clock, size: 16,),
             HorizontalSpacer.custom(width: 8.w),
             Text(
-              '',
+              meetingDpo.eventDuration!,
               style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     color: AppColor.grey88,
                   ),

@@ -1,3 +1,4 @@
+import 'package:demo_meeting/home_page/network/dto/user_dto.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -15,12 +16,16 @@ class CalendarCubit extends Cubit<CalendarState> {
 
   List<MeetingDpo> listMeeting = [];
 
-  List<MeetingDpo> schoolEvents = [];
-
-  late String schoolId;
-
   void getListUser() async {
+    emit(const CalendarState.loading());
     final response = await _repository.getListUser();
-    response.fold((left) {}, (right) {});
+    response.fold((left) {}, (right) {
+      emit(CalendarState.userLoaded(right));
+    });
+  }
+
+  void addMeeting(MeetingDpo meetingDpo){
+    listMeeting.add(meetingDpo);
+    emit(CalendarState.bookingListLoaded(listMeeting));
   }
 }
